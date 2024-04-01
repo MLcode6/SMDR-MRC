@@ -9,14 +9,14 @@ modelparameter.round              = 10;
 %% Optimization Parameters
 lambda1s = [0.1,1];
 alphas   = [0.0001,0.001,0.01,0.1];
-betas    = [0.0001,0.01,0.1];
-gammas   = [0.001,0.01,0.1,1];
-lambda2s = [0.00001,0.0001,0.1,1];
+betas    = [0.0001,0.001,0.01,0.1];
+gammas   = [0.0001,0.001,0.01,0.1];
+lambda2s = [0.00001,0.0001,0.01,0.1];
 optmParameter.sigma   = 3; % {0.1, 1, 10} % initialization
 optmParameter.miu = 0.5;
 
-optmParameter.maxIter           = 50;%×î´óµü´ú´ÎÊı
-optmParameter.minimumLossMargin = 0.001;%Á½´Îµü´úµÄ×îĞ¡ËğÊ§¼ä¾à  0.0001
+optmParameter.maxIter           = 50;%æœ€å¤§è¿­ä»£æ¬¡æ•°
+optmParameter.minimumLossMargin = 0.001;%ä¸¤æ¬¡è¿­ä»£çš„æœ€å°æŸå¤±é—´è·  0.0001
 optmParameter.bQuiet            = 1;
 
 labeled_rate = 0.2; % 0.7, 0.5, 0.2
@@ -38,7 +38,7 @@ if exist('dataset','var')==1
 end
 
 data     = double(data);
-% ¹éÒ»»¯
+% å½’ä¸€åŒ–
 %minMaxd = mapminmax(data');
 %data = minMaxd';
 target = double(target>0);
@@ -92,15 +92,15 @@ for alpha = alphas
                         label_index = randorder(1:num_label);
                         unlabel_index = randorder((num_label+1):num_train);
                         
-                        label_data = data(label_index,:); % ÓĞ±ê¼ÇÑµÁ·Ñù±¾
-                        label_target = target(:,label_index); % ÓĞ±ê¼ÇÑµÁ·Ñù±¾µÄ±êÇ©
-                        unlabel_data = data(unlabel_index,:); % ÎŞ±ê¼ÇÑµÁ·Ñù±¾
-                        test_data = data(test_index,:); % ²âÊÔÑù±¾
-                        test_target = target(:,test_index); % ²âÊÔÑù±¾µÄ±êÇ©
+                        label_data = data(label_index,:); % æœ‰æ ‡è®°è®­ç»ƒæ ·æœ¬
+                        label_target = target(:,label_index); % æœ‰æ ‡è®°è®­ç»ƒæ ·æœ¬çš„æ ‡ç­¾
+                        unlabel_data = data(unlabel_index,:); % æ— æ ‡è®°è®­ç»ƒæ ·æœ¬
+                        test_data = data(test_index,:); % æµ‹è¯•æ ·æœ¬
+                        test_target = target(:,test_index); % æµ‹è¯•æ ·æœ¬çš„æ ‡ç­¾
             
                         % train_data = [label_data;unlabel_data];
             
-                        r = size(test_target,1) - 1; % ½µÎ¬Î¬¶È
+                        r = size(test_target,1) - 1; % é™ç»´ç»´åº¦
             
                         %% Training
                         [W,M]  = SMDR_MRC(label_data,unlabel_data,label_target,LPparam,optmParameter,r);
@@ -118,14 +118,14 @@ for alpha = alphas
                         [Outputs,Pre_Labels]=MLKNN_test(MLKNN_train_data,MLKNN_train_label,MLKNN_test_data,MLKNN_test_label,Num,Prior,PriorN,Cond,CondN);
                         
                         %% Evaluation of NEW
-                        Result_NEW(:,j) = EvaluationAll(Pre_Labels,Outputs,MLKNN_test_label);%²ÎÊı¾ùÎª×ªÖÃ
+                        Result_NEW(:,j) = EvaluationAll(Pre_Labels,Outputs,MLKNN_test_label);%å‚æ•°å‡ä¸ºè½¬ç½®
                         if sum(isnan(Result_NEW(:,j))) == 0
                             j = j + 1;
                         end
                     end
                     %% the average results
-                    Avg_Means(1:7,k) = mean(Result_NEW,2);%Æ½¾ùÖµ 2´ú±íĞĞ
-                    Avg_Stds(1:7,k) = std(Result_NEW,1,2);%±ê×¼²î
+                    Avg_Means(1:7,k) = mean(Result_NEW,2);%å¹³å‡å€¼ 2ä»£è¡¨è¡Œ
+                    Avg_Stds(1:7,k) = std(Result_NEW,1,2);%æ ‡å‡†å·®
                     Avg_Means(8,k) = alpha;
                     Avg_Means(9,k) = lambda1;
                     Avg_Means(10,k) = beta;
