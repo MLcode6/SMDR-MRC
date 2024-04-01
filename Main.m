@@ -7,7 +7,7 @@ addpath(genpath('.'));
 modelparameter.round              = 10;
 
 %% Optimization Parameters
-lambda1s = [0.1,1];
+lambda1s = [0.1,1,10];
 alphas   = [0.0001,0.001,0.01,0.1];
 betas    = [0.0001,0.001,0.01,0.1];
 gammas   = [0.0001,0.001,0.01,0.1];
