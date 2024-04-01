@@ -17,5 +17,6 @@
   regular terms, we employ a novel solution approach called S-FISTA. Extensive comparison experiments on 17 multi-label benchmark datasets with the 15 top- 
   performing multi-label dimensionality reduction techniques (including a neural network technique and three feature selection methods) show that SMDR-MRC 
   outperforms all of them.},
+  
   keywords = {Semi-supervised dimensionality reduction; Multi-label learning; Instance correlations; Feature selection; Redundant correlations}
 }
