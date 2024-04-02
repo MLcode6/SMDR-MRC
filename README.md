@@ -1,4 +1,5 @@
 @article{SMDR-MRC_li2024,
+
   title = {Semi-Supervised Multi-Label Dimensionality Reduction Learning based on Minimizing Redundant Correlation of Specific and Common Features},
   
   author = {Runxin Li and Gaozhi Zhou and Xiaowu Li and Lianyin Jia and Zhenhong Shang},
